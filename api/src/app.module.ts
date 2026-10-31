@@ -6,6 +6,9 @@ import { HealthModule } from './health/health.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { StaffModule } from './staff/staff.module';
+import { CatalogModule } from './catalog/catalog.module';
+import { QuotationTemplatesModule } from './quotation-templates/quotation-templates.module';
+import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 
 @Module({
   imports: [
@@ -23,6 +26,9 @@ import { StaffModule } from './staff/staff.module';
     AuthModule,
     UsersModule,
     StaffModule,
+    CatalogModule,
+    QuotationTemplatesModule,
+    SubscriptionsModule,
     HealthModule,
   ],
 })

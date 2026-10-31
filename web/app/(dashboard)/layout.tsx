@@ -3,7 +3,8 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../hooks/use-auth';
-import { Navbar } from '../../components/shared/navbar';
+import { DashboardHeader } from '../../components/dashboard/dashboard-header';
+import { DashboardSidebar } from '../../components/dashboard/dashboard-sidebar';
 import { Loader2 } from 'lucide-react';
 
 export default function DashboardLayout({
@@ -11,7 +12,7 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, user } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -22,23 +23,26 @@ export default function DashboardLayout({
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#07090e] flex flex-col items-center justify-center text-white">
-        <Loader2 className="w-8 h-8 text-purple-500 animate-spin mb-3" />
-        <p className="text-sm text-gray-400">Verifying session...</p>
-      </div>
-    );
+        <div className="min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center text-[#0F172A]">
+          <Loader2 className="w-8 h-8 text-[#C8E63C] animate-spin mb-3 stroke-[2.5]" />
+          <p className="text-sm text-[#64748B] font-medium">Verifying session...</p>
+        </div>
+        );
   }
 
-  if (!isAuthenticated) {
+        if (!isAuthenticated) {
     return null;
   }
 
-  return (
-    <div className="min-h-screen bg-[#07090e] text-white flex flex-col">
-      <Navbar />
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {children}
-      </main>
-    </div>
-  );
+        return (
+          <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col">
+            <DashboardHeader />
+            <div className="flex flex-1">
+              <DashboardSidebar />
+              <main className="flex-1 min-h-[calc(100vh-4rem)] p-6 lg:p-8 overflow-x-hidden">
+                <div className="max-w-6xl mx-auto space-y-6">{children}</div>
+              </main>
+            </div>
+          </div>
+          );
 }

@@ -42,10 +42,10 @@ export class TokenService {
       role: user.role,
     };
 
-    return this.jwtService.signAsync(payload, {
-      secret: this.jwtSecret,
-      expiresIn: this.jwtExpiresIn as any,
-    });
+      return(this.jwtService as any).signAsync(payload, {
+        secret: this.jwtSecret,
+        expiresIn: this.jwtExpiresIn,
+      });
   }
 
   generateOpaqueToken(): string {
@@ -72,7 +72,7 @@ export class TokenService {
   }
 
   setRefreshTokenCookie(response: Response, refreshToken: string): void {
-    response.cookie(this.cookieName, refreshToken, {
+    (response as any).cookie(this.cookieName, refreshToken, {
       httpOnly: true,
       secure: this.isProduction,
       sameSite: 'lax',
@@ -82,7 +82,7 @@ export class TokenService {
   }
 
   clearRefreshTokenCookie(response: Response): void {
-    response.clearCookie(this.cookieName, {
+    (response as any).clearCookie(this.cookieName, {
       httpOnly: true,
       secure: this.isProduction,
       sameSite: 'lax',

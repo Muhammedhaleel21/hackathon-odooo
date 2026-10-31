@@ -8,6 +8,20 @@
       "when": 1793427029977,
       "tag": "0000_bitter_hannibal_king",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793410383861,
+      "tag": "0001_short_bushwacker",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793413174812,
+      "tag": "0002_tranquil_lilith",
+      "breakpoints": true
     }
   ]
 }
