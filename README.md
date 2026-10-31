@@ -107,11 +107,11 @@ Then open http://localhost:3000 — the Brightloop foundation page should show *
 | Phase | Description | Status |
 |-------|-------------|--------|
 | 1 | Project Foundation & Architecture | ✅ Complete |
-| 2 | Authentication & RBAC | 🔜 Next |
-| 3 | Customer Management | — |
-| 4 | Product & Plan Management | — |
-| 5 | Subscription Lifecycle | — |
-| 6 | Billing & Invoicing | — |
+| 2 | Authentication & RBAC | ✅ Complete |
+| 3 | Customer Management | ✅ Complete |
+| 4 | Product & Plan Management | ✅ Complete |
+| 5 | Subscription Lifecycle | ✅ Complete |
+| 6 | Billing & Invoicing | 🔜 Next |
 | 7 | Payment Integration | — |
 | 8 | Admin Dashboard | — |
 | 9 | Customer Portal | — |
