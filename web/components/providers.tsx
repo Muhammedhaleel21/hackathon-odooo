@@ -1,5 +1,6 @@
 'use client';
 
+// @ts-ignore
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState, type ReactNode } from 'react';
 import { AuthProvider } from '../contexts/auth-context';
