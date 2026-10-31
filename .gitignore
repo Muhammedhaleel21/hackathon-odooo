@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Next.js
+.next/
+out/
+.vercel/
+
+# NestJS / Node build output
+dist/
+build/
+
+# Cache
+.cache/
+.turbo/
+*.tsbuildinfo
+
+# Testing
+coverage/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
+
+# Deployment
+.netlify/
