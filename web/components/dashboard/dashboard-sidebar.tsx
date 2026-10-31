@@ -8,8 +8,6 @@ import {
   Package,
   Layers,
   LayoutDashboard,
-  Users,
-  Settings,
   FileText,
   CreditCard,
   UserCheck,
@@ -17,32 +15,38 @@ import {
   BarChart3,
   Receipt,
   Sparkles,
+  FileSpreadsheet,
 } from 'lucide-react';
 
 export function DashboardSidebar() {
   const pathname = usePathname();
   const { user } = useAuth();
   const isAdmin = user?.role === 'admin';
+  const isCustomer = user?.role === 'customer';
 
-  const navItems = [
+  const catalogOpsItems = [
     {
       label: 'Overview',
-      href: isAdmin ? '/admin' : '/staff',
+      href: isAdmin ? '/admin' : isCustomer ? '/portal' : '/staff',
       icon: LayoutDashboard,
-      active: pathname === '/admin' || pathname === '/staff',
+      active: pathname === '/admin' || pathname === '/staff' || pathname === '/portal',
     },
-    {
-      label: 'Products',
-      href: '/admin/products',
-      icon: Package,
-      active: pathname.startsWith('/admin/products'),
-    },
-    {
-      label: 'Subscription Plans',
-      href: '/admin/plans',
-      icon: Layers,
-      active: pathname.startsWith('/admin/plans'),
-    },
+    ...(!isCustomer
+      ? [
+          {
+            label: 'Products',
+            href: '/admin/products',
+            icon: Package,
+            active: pathname.startsWith('/admin/products'),
+          },
+          {
+            label: 'Subscription Plans',
+            href: '/admin/plans',
+            icon: Layers,
+            active: pathname.startsWith('/admin/plans'),
+          },
+        ]
+      : []),
     ...(isAdmin
       ? [
           {
@@ -55,9 +59,32 @@ export function DashboardSidebar() {
       : []),
   ];
 
+  const salesItems = [
+    ...(!isCustomer
+      ? [
+          {
+            label: 'Templates',
+            href: '/quotations/templates',
+            icon: FileSpreadsheet,
+            active: pathname.startsWith('/quotations/templates'),
+          },
+        ]
+      : []),
+    {
+      label: 'Quotations',
+      href: '/quotations',
+      icon: FileText,
+      active: pathname === '/quotations' || (pathname.startsWith('/quotations') && !pathname.startsWith('/quotations/templates')),
+    },
+    {
+      label: 'Subscriptions',
+      href: '/subscriptions',
+      icon: Sparkles,
+      active: pathname.startsWith('/subscriptions'),
+    },
+  ];
+
   const upcomingPhases = [
-    { label: 'Quotations', icon: FileText, phase: 'Phase 4' },
-    { label: 'Subscriptions', icon: Sparkles, phase: 'Phase 5' },
     { label: 'Invoices', icon: Receipt, phase: 'Phase 6' },
     { label: 'Discounts', icon: Tag, phase: 'Phase 7' },
     { label: 'Payments', icon: CreditCard, phase: 'Phase 8' },
@@ -67,12 +94,12 @@ export function DashboardSidebar() {
   return (
     <aside className="w-64 bg-white border-r border-[#E2E8F0] flex flex-col justify-between shrink-0 h-[calc(100vh-4rem)] sticky top-16 select-none overflow-y-auto">
       <div className="p-4 space-y-6">
-        {/* Main Navigation Group */}
+        {/* Ops / Catalog Group */}
         <div className="space-y-1.5">
           <div className="px-3 text-[11px] font-semibold uppercase tracking-wider text-[#94A3B8] mb-2">
             Catalog & Ops
           </div>
-          {navItems.map((item) => {
+          {catalogOpsItems.map((item) => {
             const Icon = item.icon;
             return (
               <Link
@@ -84,7 +111,35 @@ export function DashboardSidebar() {
                     : 'text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100/70 font-medium'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${item.active ? 'text-[#0F172A]' : 'text-[#64748B]'}`} />
+                <Icon
+                  className={`w-4 h-4 ${item.active ? 'text-[#0F172A]' : 'text-[#64748B]'}`}
+                />
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Phase 4: Sales & Subscriptions Group */}
+        <div className="space-y-1.5">
+          <div className="px-3 text-[11px] font-semibold uppercase tracking-wider text-[#94A3B8] mb-2">
+            Sales & Subscriptions
+          </div>
+          {salesItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm transition-all ${
+                  item.active
+                    ? 'bg-[#C8E63C] text-[#0F172A] font-semibold shadow-sm'
+                    : 'text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100/70 font-medium'
+                }`}
+              >
+                <Icon
+                  className={`w-4 h-4 ${item.active ? 'text-[#0F172A]' : 'text-[#64748B]'}`}
+                />
                 <span>{item.label}</span>
               </Link>
             );
@@ -117,7 +172,7 @@ export function DashboardSidebar() {
         </div>
       </div>
 
-      {/* Bottom Pinned Settings & Role */}
+      {/* Bottom Pinned Status */}
       <div className="p-4 border-t border-[#F1F5F9] space-y-2">
         <div className="flex items-center justify-between px-3 py-2 rounded-xl text-xs text-[#64748B]">
           <div className="flex items-center gap-2">
@@ -132,4 +187,3 @@ export function DashboardSidebar() {
     </aside>
   );
 }
-

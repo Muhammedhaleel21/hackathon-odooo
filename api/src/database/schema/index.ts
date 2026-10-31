@@ -5,3 +5,5 @@ export * from './categories.schema';
 export * from './products.schema';
 export * from './variants.schema';
 export * from './plans.schema';
+export * from './quotation-templates.schema';
+export * from './subscriptions.schema';
