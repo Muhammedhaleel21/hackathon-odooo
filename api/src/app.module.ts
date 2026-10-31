@@ -7,6 +7,8 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { StaffModule } from './staff/staff.module';
 import { CatalogModule } from './catalog/catalog.module';
+import { QuotationTemplatesModule } from './quotation-templates/quotation-templates.module';
+import { SubscriptionsModule } from './subscriptions/subscriptions.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { CatalogModule } from './catalog/catalog.module';
     UsersModule,
     StaffModule,
     CatalogModule,
+    QuotationTemplatesModule,
+    SubscriptionsModule,
     HealthModule,
   ],
 })

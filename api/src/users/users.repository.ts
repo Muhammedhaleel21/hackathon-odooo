@@ -16,4 +16,19 @@ export class UsersRepository {
       .limit(1);
     return user || null;
   }
+
+  async findCustomers(): Promise<
+    Array<Pick<User, 'id' | 'name' | 'email' | 'isActive' | 'createdAt'>>
+  > {
+    return this.db
+      .select({
+        id: users.id,
+        name: users.name,
+        email: users.email,
+        isActive: users.isActive,
+        createdAt: users.createdAt,
+      })
+      .from(users)
+      .where(eq(users.role, 'customer'));
+  }
 }

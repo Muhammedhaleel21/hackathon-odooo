@@ -478,13 +478,15 @@ export default function AdminDashboardPage() {
                                                                                             isActive: !member.isActive,
                                                                                           })
                                                                                         }
-                                                                                                ? 'text-red-500 hover:bg-red-50'
-                                                                                                : 'text-emerald-600 hover:bg-emerald-50'
-                                                                                            }`}
-                      >
-                        {member.isActive ? 'Deactivate' : 'Activate'}
-                      </button>
-                    </td>
+                                                                                        className={`px-2.5 py-1 rounded-lg font-medium text-[11px] transition-colors ${
+                                                                                          member.isActive
+                                                                                            ? 'text-red-500 hover:bg-red-50'
+                                                                                            : 'text-emerald-600 hover:bg-emerald-50'
+                                                                                        }`}
+                                                                                      >
+                                                                                        {member.isActive ? 'Deactivate' : 'Activate'}
+                                                                                      </button>
+                                                                                    </td>
                   </tr>
                 ))}
               </tbody>

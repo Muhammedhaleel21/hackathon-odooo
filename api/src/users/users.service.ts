@@ -22,4 +22,8 @@ export class UsersService {
       updatedAt: user.updatedAt,
     };
   }
+
+  async getCustomers() {
+    return this.usersRepository.findCustomers();
+  }
 }
